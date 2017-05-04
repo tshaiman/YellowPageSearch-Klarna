@@ -37,10 +37,18 @@
     <div class="results">
         <div class="cui__selector--direct title">
 
-            <h2 class="cui__selector--direct__title">
-                Search results hello3
-            </h2>
-        </div>
+            <div *ngIf="persons">
+                <h2 class="cui__selector--direct__title">
+                    Search results 
+                </h2>
+                <person-detail *ngFor="let person of persons" [person]="person"></person-detail>
+            </div>
+            <div *ngIf="!persons">
+                <h2 class="cui__selector--direct__title">
+                    No Search results Found
+                </h2>
+            </div>
+       </div>
     </div>
 </div>
 </body>
