@@ -62,12 +62,8 @@ namespace Klarna.YPSearch.Repository.Match
         
         private bool MatchOnlyNames(Person p, List<string> names)
         {
-            foreach (var name in names)
-            {
-                if (!p.Name.CaseInsensitiveContains(name))
-                    return false;
-            }
-            return true;
+            var nonMatch = names.Any(nameToken => !p.ContainsName(nameToken));
+            return !nonMatch;
         }
 
         

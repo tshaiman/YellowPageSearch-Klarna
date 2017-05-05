@@ -15,8 +15,10 @@ namespace Klarna.YPSearch.Core.Model
         public string Phone { get; set; }
         public string Address { get; set; }
         public string ImageUrl { get; set; } // a blob storage image
-        
 
+        //for comparison
+        private string[] _nameTokens;
+        
         public Person()
         {
 
@@ -30,6 +32,17 @@ namespace Klarna.YPSearch.Core.Model
             Age = age;
             Address = address;
             ImageUrl = imageUrl;
+
+            if (!string.IsNullOrEmpty(Name))
+                _nameTokens = this.Name.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries).ToArray();
+            else
+                _nameTokens = new string[0];
+        }
+
+        //detect whether the given token exists in Name
+        public bool ContainsName(string token)
+        {
+            return _nameTokens.Any(s => s.Equals(token, StringComparison.OrdinalIgnoreCase));
         }
     }
 
