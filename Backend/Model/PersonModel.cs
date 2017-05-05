@@ -15,7 +15,6 @@ namespace Klarna.YPSearch.Repository
     {
         public string id { get; set; }
         public string name { get; set; }
-        public string avatar_image { get; set; }
         public string avatar_origin { get; set; }
         public long birthday { get; set; }
         public string phone { get; set; }
@@ -30,8 +29,6 @@ namespace Klarna.YPSearch.Repository
        
         private string getImageUrl()
         {
-           /* if (!string.IsNullOrEmpty(avatar_image))
-                return avatar_image;*/
             return avatar_origin;
         }
     }
