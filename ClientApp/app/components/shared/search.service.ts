@@ -16,9 +16,12 @@ export class SearchService {
         return this.http.get(`api/Search/TermSearch/${term}`)
            .map(response => response.json() as Person[])
             .toPromise();
+            
     }
 
-      getPeople() {
+
+    ///Test method
+    getPeople() {
         return this.http.get(`api/Search/GetPeople`)
            .map(response => response.json() as Person[])
             .toPromise();

@@ -11,28 +11,53 @@ import { Person } from '../../shared/person.type';
 export class SearchListComponent implements OnInit{
 
     showInputMessage: boolean;
+    resultsMessage: string;
     persons :Person[] ;
 
     constructor(private searchService: SearchService){
         this.showInputMessage = true;
+        this.resultsMessage = "";
     }
     
     ngOnInit() {
-        this.searchService.getPeople()
+        //Testing 
+        /*this.searchService.getPeople()
          .then(persons => {
              this.persons = persons;
-            });
+            });*/
     }
-    onFocus(){
-        this.showInputMessage = false;
+    update(term: string){
+        if(term) {
+            this.showInputMessage = false;
+        }else{
+            this.showInputMessage = true;
+        }
     }
-    onLostFocus(){
-        this.showInputMessage = true;
+    
+    updateUiState(){
+        if(!this.persons || this.persons.length==0){
+           this.resultsMessage = "No results, please review your search or try a different one";
+        }
+        else{
+             this.resultsMessage = "Search Results";
+        }
     }
 
-    onKey(event: any) { // without type info
-     if(event.keyCode == 13){
-         this.showInputMessage = false;
-     }
-  }
+    search(term: string) { // without type info
+     this.persons = null;
+     if(term){
+        this.showInputMessage = false;
+        this.persons = null;
+        this.searchService.search(term)
+        .then(persons => {
+             this.persons = persons;
+             this.updateUiState();
+        });
+      }
+      else {
+          this.persons = null;
+      }
+    }
+
+    
 }

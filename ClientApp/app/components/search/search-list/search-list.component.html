@@ -21,32 +21,24 @@
             margin-top: 40px;
         }
     </style>
-    <title>Eksercise</title>
+    <title>Yellow Pages Search</title>
 </head>
 <body>
 <div class="search">
     <div class="cui__input giant">
-        <div *ngIf="showInputMessage" >
-            <label class="cui__input__label">
-                Type your search query
-            </label>
-        </div>
-        <input class="cui__input__input" (keyup)="onKey($event)" (focus)="onFocus()" (focusout)="onLostFocus()" />
+        
+        <input #query placeholder="Type your search query" class="cui__input__input" (keyup.enter)="search(query.value)" 
+        (blur)="update(query.value)"  (keyup)="search(query.value)"  />
     </div>
 
     <div class="results">
         <div class="cui__selector--direct title">
 
+            <h2 class="cui__selector--direct__title">
+                    {{resultsMessage}}
+                </h2>
             <div *ngIf="persons">
-                <h2 class="cui__selector--direct__title">
-                    Search results 
-                </h2>
                 <person-detail *ngFor="let person of persons" [person]="person"></person-detail>
-            </div>
-            <div *ngIf="!persons">
-                <h2 class="cui__selector--direct__title">
-                    No Search results Found
-                </h2>
             </div>
        </div>
     </div>

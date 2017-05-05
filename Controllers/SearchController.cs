@@ -3,12 +3,14 @@ using Microsoft.AspNetCore.Mvc;
 using Klarna.YPSearch.Repository;
 using Klarna.YPSearch.Core.Interfaces;
 using Klarna.YPSearch.Core.Model;
+using System.Linq;
 
 namespace ngYPSearch.Controllers
 {
     [Route("api/[controller]")]
     public class SearchController : Controller
     {
+        private const int MaxFetch = 100;
         // there is 1 instance of the Store
         private static YellowPagesStore _store = new YellowPagesStore();
         private static ILogger logger = new Klarna.YPSearch.Core.Logger.SimpleLogger();
@@ -20,7 +22,7 @@ namespace ngYPSearch.Controllers
         {
             try
             {
-                return new ObjectResult(_store.Search(term).ToArray());
+                return new ObjectResult(_store.Search(term).Take(MaxFetch).ToArray());
             }
             catch (Exception e)
             {
@@ -35,7 +37,7 @@ namespace ngYPSearch.Controllers
         {
             try
             {
-                return new ObjectResult(_store.Get(5));
+                return new ObjectResult(_store.Get(100));
             }
             catch (Exception e)
             {
