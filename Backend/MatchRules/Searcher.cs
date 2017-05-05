@@ -26,7 +26,12 @@ namespace Klarna.YPSearch.Repository.Match
         internal List<Person> Search(List<Person> persons,string phrase)
         {
             var matchRule = CreateRule(phrase);
-            return persons.Where(p => matchRule.IsMatch(p)).ToList();
+            var result = persons.Where(p => matchRule.IsMatch(p)).ToList();
+
+            //TODO : Use Rank mechnaims to detect which has the better match and return results accordingly
+            try{persons.Sort(new PersonComparer());}catch(Exception e){ }
+
+            return result;
 
         }
 

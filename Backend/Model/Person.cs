@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Klarna.YPSearch.Core.Model
 {
-    public class Person : IPerson
+    public class Person : IPerson 
     {
         public string Id { get; private set; }
         public string Name { get; set; }
@@ -44,7 +44,20 @@ namespace Klarna.YPSearch.Core.Model
         {
             return _nameTokens.Any(s => s.Equals(token, StringComparison.OrdinalIgnoreCase));
         }
+
+       
     }
 
-    
+    public class PersonComparer : IComparer<Person>
+    {
+        public int Compare(Person x, Person y)
+        {
+            if (x.Name.Equals(y.Name))
+                return x.Age - y.Age;
+            return x.Name.CompareTo(y.Name);
+        }
+    }
+
+
+
 }

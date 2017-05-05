@@ -5,6 +5,7 @@ import { AppComponent } from './components/app/app.component'
 import { SearchListComponent } from './components/search/search-list/search-list.component';
 import { PersonDetailComponent } from './components/search/person-detail/person-detail.component';
 import { SearchService } from './components/shared/search.service';
+import { FormsModule }   from '@angular/forms';
 
 @NgModule({
     bootstrap: [ AppComponent ],
@@ -16,6 +17,7 @@ import { SearchService } from './components/shared/search.service';
     ],
     imports: [
         UniversalModule, // Must be first import. This automatically imports BrowserModule, HttpModule, and JsonpModule too.
+        FormsModule,
         RouterModule.forRoot([
             { path: '', redirectTo: 'search', pathMatch: 'full' },
             { path: 'search', component: SearchListComponent },

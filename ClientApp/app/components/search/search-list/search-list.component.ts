@@ -8,34 +8,24 @@ import { Person } from '../../shared/person.type';
     templateUrl: './search-list.component.html',
     styleUrls: ['./search-list.component.css']
 })
-export class SearchListComponent implements OnInit{
+export class SearchListComponent {
 
-    showInputMessage: boolean;
     resultsMessage: string;
+    searchTerm: string;
     persons :Person[] ;
 
     constructor(private searchService: SearchService){
-        this.showInputMessage = true;
         this.resultsMessage = "";
     }
-    
-    ngOnInit() {
-        //Testing 
-        /*this.searchService.getPeople()
-         .then(persons => {
-             this.persons = persons;
-            });*/
-    }
-    update(term: string){
-        if(term) {
-            this.showInputMessage = false;
-        }else{
-            this.showInputMessage = true;
-        }
-    }
+   
     
     updateUiState(){
-        if(!this.persons || this.persons.length==0){
+        if (!this.searchTerm) {
+            this.persons = null;
+            this.resultsMessage = "";
+            return;
+        }
+        if (!this.persons || this.persons.length == 0) {
            this.resultsMessage = "No results, please review your search or try a different one";
         }
         else{
@@ -43,19 +33,19 @@ export class SearchListComponent implements OnInit{
         }
     }
 
-    search(term: string) { // without type info
+    //The search endpoint   
+    //Todo : use RxJS for throtlling the keystroke and cancel previous request
+    search() { 
      this.persons = null;
-     if(term){
-        this.showInputMessage = false;
-        this.persons = null;
-        this.searchService.search(term)
+     if (this.searchTerm){
+        this.searchService.search(this.searchTerm)
         .then(persons => {
              this.persons = persons;
              this.updateUiState();
         });
       }
       else {
-          this.persons = null;
+         this.updateUiState();
       }
     }
 

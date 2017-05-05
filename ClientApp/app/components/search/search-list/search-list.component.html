@@ -26,9 +26,7 @@
 <body>
 <div class="search">
     <div class="cui__input giant">
-        
-        <input #query placeholder="Type your search query" class="cui__input__input" (keyup.enter)="search(query.value)" 
-        (blur)="update(query.value)"  (keyup)="search(query.value)"  />
+        <input type="text" [(ngModel)]="searchTerm" placeholder="Type your search query" class="cui__input__input" (keyup)="search()"  />
     </div>
 
     <div class="results">
