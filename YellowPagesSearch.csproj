@@ -14,6 +14,7 @@
   </ItemGroup>
   <ItemGroup>
     <!-- Files not to show in IDE -->
+    <None Remove="Properties\PublishProfiles\Klarna-YellowPagesSearch - Web Deploy.pubxml" />
     <None Remove="yarn.lock" />
     <!-- Files not to publish (note that the 'dist' subfolders are re-added below) -->
     <Content Remove="ClientApp\**" />
@@ -24,6 +25,7 @@
     <Folder Include="Backend\MatchRules\" />
     <Folder Include="Backend\Services\" />
     <Folder Include="Backend\Utils\" />
+    <Folder Include="Properties\PublishProfiles\" />
   </ItemGroup>
   <Target Name="RunWebpack" AfterTargets="ComputeFilesToPublish">
     <!-- As part of publishing, ensure the JS resources are freshly built in production mode -->
