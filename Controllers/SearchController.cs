@@ -10,7 +10,7 @@ namespace ngYPSearch.Controllers
     [Route("api/[controller]")]
     public class SearchController : Controller
     {
-        private const int MaxFetch = 100;
+        private const int MaxFetch = 25;
         // there is 1 instance of the Store
         private static YellowPagesStore _store = new YellowPagesStore();
         private static ILogger logger = new Klarna.YPSearch.Core.Logger.SimpleLogger();
